@@ -1,13 +1,16 @@
-pipeline
-{
+pipeline {
     agent any
-    stages{
-        stage("run python")
-        {
-            steps  
-            {
-                sh 'python3 hello.py'
-                
+
+    stages {
+        stage('Run Python Script') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'python3 hello.py'
+                    } else {
+                        bat 'python hello.py'
+                    }
+                }
             }
         }
     }
